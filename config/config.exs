@@ -13,8 +13,8 @@ config :obank,
 # Configures the endpoint
 config :obank, ObankWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "p5F9WRMW/bgiXNUzYWvmGHKS/qNzkhcNjsDE7NLKpUu8J8W4lINALmvL07Vv7KTy",
-  render_errors: [view: ObankWeb.ErrorView, accepts: ~w(html json)],
+  secret_key_base: "DQqOFA56heYTwrn0DpLKZZFXaxd9AjjbgzW+l3L5R4R1RHQduQ6jA5dRKRE3iZwC",
+  render_errors: [view: ObankWeb.ErrorView, accepts: ~w(json)],
   pubsub: [name: Obank.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger

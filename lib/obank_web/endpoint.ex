@@ -18,8 +18,6 @@ defmodule ObankWeb.Endpoint do
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
-    socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
-    plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
   end
 
@@ -40,7 +38,7 @@ defmodule ObankWeb.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_obank_key",
-    signing_salt: "zB0Hgzcv"
+    signing_salt: "QSmuaUXE"
 
   plug ObankWeb.Router
 end
