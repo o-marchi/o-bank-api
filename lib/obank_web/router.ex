@@ -5,7 +5,9 @@ defmodule ObankWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", ObankWeb do
+  scope "/", ObankWeb do
     pipe_through :api
+
+    resources "/users", UserController
   end
 end
