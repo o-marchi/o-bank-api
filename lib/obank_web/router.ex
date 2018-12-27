@@ -8,6 +8,7 @@ defmodule ObankWeb.Router do
   scope "/", ObankWeb do
     pipe_through :api
 
-    resources "/users", UserController
+    resources "/users", UserController, only: [:index, :create, :show]
+    post "/login", AuthController, :login
   end
 end
