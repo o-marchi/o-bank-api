@@ -12,8 +12,9 @@ defmodule ObankWeb.UserView do
 
   def render("user.json", %{user: user}) do
     %{id: user.id,
-      name: user.name,
       username: user.username,
-      email: user.email}
+      name: user.name,
+      email: user.email,
+      cpf: user.cpf}
   end
 end
