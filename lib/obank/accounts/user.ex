@@ -1,7 +1,7 @@
 defmodule Obank.Accounts.User do
   use Ecto.Schema
-  import Ecto.Changeset
 
+  import Ecto.Changeset
   import Comeonin.Bcrypt, only: [hashpwsalt: 1]
 
   schema "users" do
@@ -37,5 +37,5 @@ defmodule Obank.Accounts.User do
   defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: pass}} = changeset) do
     put_change(changeset, :password_hash, hashpwsalt(pass))
   end
-  defp put_password_hash(changeset) do changeset end
+  defp put_password_hash(changeset), do: changeset
 end
