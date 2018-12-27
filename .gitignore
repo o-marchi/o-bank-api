@@ -34,3 +34,8 @@ obank-*.tar
 # secrets files as long as you replace their contents by environment
 # variables.
 /config/*.secret.exs
+
+# Files from Elixir Language Server
+# They allow code editors to probide IDE support
+# https://github.com/JakeBecker/elixir-ls
+/.elixir_ls/
