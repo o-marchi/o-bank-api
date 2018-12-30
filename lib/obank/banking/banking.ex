@@ -5,6 +5,7 @@ defmodule Obank.Banking do
 
   import Ecto.Query, warn: false
   alias Obank.Repo
+  alias Ecto.Changeset
 
   alias Obank.Banking.Transfer
 
@@ -49,11 +50,14 @@ defmodule Obank.Banking do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_transfer(attrs \\ %{}) do
+  def create_transfer(from_user, to_user, attrs \\ %{}) do
+
     %Transfer{}
     |> Transfer.changeset(attrs)
+    |> Changeset.put_assoc(:from, from_user)
+    |> Changeset.put_assoc(:to, to_user)
     |> Repo.insert()
-  end
+  end 
 
   @doc """
   Updates a transfer.
