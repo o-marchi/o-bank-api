@@ -15,6 +15,7 @@ defmodule ObankWeb.UserView do
       username: user.username,
       name: user.name,
       email: user.email,
-      cpf: user.cpf}
+      cpf: user.cpf,
+      amount: user.amount}
   end
 end
