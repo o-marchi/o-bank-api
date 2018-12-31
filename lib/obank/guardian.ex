@@ -9,7 +9,7 @@ defmodule Obank.Guardian do
 
   def resource_from_claims(claims) do
     id = claims["sub"]
-    user = Obank.Accounts.get_user(id)
+    user = Obank.Accounts.get_user!(id)
     {:ok, user}
   end
   def resource_from_claims(_claims), do: {:error, :reason_for_error}
