@@ -77,6 +77,18 @@ defmodule Obank.Accounts do
     |> Repo.update()
   end
 
+  def decrease_amount_user(%User{} = user, amount) do
+    user
+    |> User.decrease_amount_changeset(amount)
+    |> Repo.update()
+  end
+
+  def increase_amount_user(%User{} = user, amount) do
+    user
+    |> User.increase_amount_changeset(amount)
+    |> Repo.update()
+  end
+
   @doc """
   Deletes a User.
 

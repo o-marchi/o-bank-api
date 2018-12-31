@@ -4,6 +4,8 @@ defmodule Obank.Accounts.User do
   import Ecto.Changeset
   import Comeonin.Bcrypt, only: [hashpwsalt: 1]
 
+  alias Obank.Banking.Transfer
+
   schema "users" do
     field :email, :string
     field :name, :string
@@ -13,7 +15,22 @@ defmodule Obank.Accounts.User do
     field :password, :string, virtual: true
     field :password_hash, :string
 
+    has_many :transfers_made, Transfer, foreign_key: :from
+    has_many :transfers_received, Transfer, foreign_key: :to
+
     timestamps()
+  end
+
+  @doc false
+  def decrease_amount_changeset(user, amount) do
+    user
+    |> change(amount: user.amount - amount)
+  end
+
+  @doc false
+  def increase_amount_changeset(user, amount) do
+    user
+    |> change(amount: user.amount + amount)
   end
 
   @doc false
