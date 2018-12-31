@@ -1,15 +1,11 @@
-defmodule ObankWeb.TransferView do
+defmodule ObankWeb.BankingView do
   use ObankWeb, :view
-  alias ObankWeb.TransferView
+  alias ObankWeb.BankingView
   alias ObankWeb.UserView
   alias Obank.Accounts
 
   def render("index.json", %{transfers: transfers}) do
-    %{data: render_many(transfers, TransferView, "transfer.json")}
-  end
-
-  def render("show.json", %{transfer: transfer}) do
-    %{data: render_one(transfer, TransferView, "transfer.json")}
+    %{data: render_many(transfers, BankingView, "transfer.json")}
   end
 
   def render("transfer.json", %{transfer: transfer}) do

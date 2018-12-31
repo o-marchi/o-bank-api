@@ -31,7 +31,7 @@ defmodule ObankWeb.Router do
     get "/me", UserController, :me
 
     get "/transfer", BankingController, :index
-    post "/transfer", BankingController, :create
+    post "/transfer", BankingController, :transfer
   end
 end
 

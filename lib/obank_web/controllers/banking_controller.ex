@@ -28,8 +28,7 @@ defmodule ObankWeb.BankingController do
         {:ok, %{from_user: _from_user, to_user: _to_user, transfer: transfer}} ->
           conn
           |> put_status(:created)
-          |> render("show.json", transfer: transfer)
+          |> render("transfer.json", transfer: transfer)
       end
   end
-
 end
