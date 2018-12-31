@@ -24,8 +24,8 @@ defmodule Obank.Accounts.User do
 
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :username, :email, :cpf, :password])
-    |> validate_required([:name, :username, :email, :cpf, :password])
+    |> cast(attrs, [:name, :email, :cpf, :password])
+    |> validate_required([:name, :email, :cpf, :password])
     # E-mail
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/)
