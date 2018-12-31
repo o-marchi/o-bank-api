@@ -8,6 +8,7 @@ defmodule Obank.Banking do
   alias Ecto.Changeset
 
   alias Obank.Banking.Transfer
+  alias Obank.Banking.Withdraw
 
   @doc """
   Returns the list of transfers.
@@ -57,52 +58,13 @@ defmodule Obank.Banking do
     |> Changeset.put_assoc(:from, from_user)
     |> Changeset.put_assoc(:to, to_user)
     |> Repo.insert()
+  end
+
+  def create_withdraw(user, attrs \\ %{}) do
+
+    %Withdraw{}
+    |> Withdraw.changeset(attrs)
+    |> Changeset.put_assoc(:user, user)
+    |> Repo.insert()
   end 
-
-  @doc """
-  Updates a transfer.
-
-  ## Examples
-
-      iex> update_transfer(transfer, %{field: new_value})
-      {:ok, %Transfer{}}
-
-      iex> update_transfer(transfer, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_transfer(%Transfer{} = transfer, attrs) do
-    transfer
-    |> Transfer.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a Transfer.
-
-  ## Examples
-
-      iex> delete_transfer(transfer)
-      {:ok, %Transfer{}}
-
-      iex> delete_transfer(transfer)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_transfer(%Transfer{} = transfer) do
-    Repo.delete(transfer)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking transfer changes.
-
-  ## Examples
-
-      iex> change_transfer(transfer)
-      %Ecto.Changeset{source: %Transfer{}}
-
-  """
-  def change_transfer(%Transfer{} = transfer) do
-    Transfer.changeset(transfer, %{})
-  end
 end

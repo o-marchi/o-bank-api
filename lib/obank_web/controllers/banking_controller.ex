@@ -4,7 +4,6 @@ defmodule ObankWeb.BankingController do
   alias Ecto.Multi
   alias Obank.Repo
   alias Obank.Banking
-  alias Obank.Banking.Transfer
   alias Obank.Accounts
 
   action_fallback ObankWeb.FallbackController
@@ -19,7 +18,7 @@ defmodule ObankWeb.BankingController do
     from_user = Accounts.get_user!(conn.assigns.user.id)
     to_user = Accounts.get_user!(to)
 
-    multi = Multi.new
+    Multi.new
       |> Multi.run(:from_user, fn _, %{} -> Accounts.decrease_amount_user(from_user, amount) end)
       |> Multi.run(:to_user,   fn _, %{} -> Accounts.increase_amount_user(to_user, amount) end)
       |> Multi.run(:transfer,  fn _, %{} -> Banking.create_transfer(from_user, to_user, %{amount: amount}) end)
@@ -36,10 +35,15 @@ defmodule ObankWeb.BankingController do
 
     user = Accounts.get_user!(conn.assigns.user.id)
 
-    with {:ok, user} <- Accounts.decrease_amount_user(user, amount) do
-      conn
-      |> put_view(ObankWeb.UserView)
-      |> render("show.json", user: user)
-    end
+    Multi.new
+      |> Multi.run(:user,     fn _, %{} -> Accounts.decrease_amount_user(user, amount) end)
+      |> Multi.run(:withdraw, fn _, %{} -> Banking.create_withdraw(user, %{amount: amount}) end)
+      |> Repo.transaction
+      |> case do
+        {:ok, %{user: user, withdraw: _withdraw}} ->
+          conn
+          |> put_view(ObankWeb.UserView)
+          |> render("show.json", user: user)
+      end
   end
 end
