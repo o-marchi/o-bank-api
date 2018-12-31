@@ -13,6 +13,7 @@ defmodule ObankWeb.BankingView do
   def render("transfer.json", %{banking: transfer}) do
     %{to: render_one(Accounts.get_user!(transfer.to_id), UserView, "user.json"),
       from: render_one(Accounts.get_user!(transfer.from_id), UserView, "user.json"), 
-      amount: transfer.amount}
+      amount: transfer.amount,
+      inserted_at: transfer.inserted_at}
   end
 end

@@ -21,7 +21,10 @@ defmodule Obank.Banking do
 
   """
   def list_transfers_by_user(user_id) do
-    query = from t in Transfer, where: [to_id: 30]
+    query = from t in Transfer,
+            where: [to_id: ^user_id],
+            or_where: [from_id: ^user_id],
+            order_by: [desc: t.inserted_at]
 
     Repo.all(query)
   end
