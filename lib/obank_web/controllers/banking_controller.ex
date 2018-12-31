@@ -8,9 +8,9 @@ defmodule ObankWeb.BankingController do
 
   action_fallback ObankWeb.FallbackController
   
-  def index(conn, _params) do
-    transfers = Banking.list_transfers()
-    render(conn, "index.json", transfers: transfers)
+  def my_transfers(conn, _params) do
+    transfers = Banking.list_transfers_by_user(conn.assigns.user.id)
+    render(conn, "transfers.json", transfers: transfers)
   end
 
   def transfer(conn, %{"amount" => amount, "to" => to}) do

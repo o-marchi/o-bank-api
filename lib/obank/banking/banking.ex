@@ -3,7 +3,8 @@ defmodule Obank.Banking do
   The Banking context.
   """
 
-  import Ecto.Query, warn: false
+  import Ecto.Query, warn: false, only: [from: 2]
+
   alias Obank.Repo
   alias Ecto.Changeset
 
@@ -19,25 +20,11 @@ defmodule Obank.Banking do
       [%Transfer{}, ...]
 
   """
-  def list_transfers do
-    Repo.all(Transfer)
+  def list_transfers_by_user(user_id) do
+    query = from t in Transfer, where: [to_id: 30]
+
+    Repo.all(query)
   end
-
-  @doc """
-  Gets a single transfer.
-
-  Raises `Ecto.NoResultsError` if the Transfer does not exist.
-
-  ## Examples
-
-      iex> get_transfer!(123)
-      %Transfer{}
-
-      iex> get_transfer!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_transfer!(id), do: Repo.get!(Transfer, id)
 
   @doc """
   Creates a transfer.
