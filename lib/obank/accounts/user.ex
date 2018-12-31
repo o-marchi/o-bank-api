@@ -7,7 +7,6 @@ defmodule Obank.Accounts.User do
   schema "users" do
     field :email, :string
     field :name, :string
-    field :username, :string
     field :cpf, :string
     field :amount, :integer
 
@@ -27,15 +26,12 @@ defmodule Obank.Accounts.User do
     user
     |> cast(attrs, [:name, :username, :email, :cpf, :password])
     |> validate_required([:name, :username, :email, :cpf, :password])
-    # Username
-    |> unique_constraint(:username)
-    |> validate_format(:username, ~r/^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){2,51}/)
     # E-mail
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/)
     # CPF
     |> unique_constraint(:cpf)
-    |> validate_format(:cpf, ~r/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/)
+    |> validate_format(:cpf, ~r/[0-9]{11}/)
     # Password
     |> put_password_hash
   end
