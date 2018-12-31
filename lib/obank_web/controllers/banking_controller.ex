@@ -1,4 +1,4 @@
-defmodule ObankWeb.TransferController do
+defmodule ObankWeb.BankingController do
   use ObankWeb, :controller
 
   alias Ecto.Multi
@@ -14,7 +14,7 @@ defmodule ObankWeb.TransferController do
     render(conn, "index.json", transfers: transfers)
   end
 
-  def create(conn, %{"amount" => amount, "to" => to}) do
+  def transfer(conn, %{"amount" => amount, "to" => to}) do
 
     from_user = Accounts.get_user!(conn.assigns.user.id)
     to_user = Accounts.get_user!(to)
@@ -32,8 +32,4 @@ defmodule ObankWeb.TransferController do
       end
   end
 
-  def show(conn, %{"id" => id}) do
-    transfer = Accounts.get_transfer!(id)
-    render(conn, "show.json", transfer: transfer)
-  end
 end
