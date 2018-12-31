@@ -3,6 +3,7 @@ defmodule ObankWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug CORSPlug, origin: "*", max_age: 86400, expose: ["Authorization"]
   end
 
   pipeline :authenticated do

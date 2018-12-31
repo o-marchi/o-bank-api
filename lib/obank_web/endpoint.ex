@@ -40,5 +40,7 @@ defmodule ObankWeb.Endpoint do
     key: "_obank_key",
     signing_salt: "QSmuaUXE"
 
+  plug CORSPlug
+
   plug ObankWeb.Router
 end
