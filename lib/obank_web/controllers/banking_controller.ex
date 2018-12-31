@@ -31,4 +31,15 @@ defmodule ObankWeb.BankingController do
           |> render("transfer.json", transfer: transfer)
       end
   end
+
+  def withdraw(conn, %{"amount" => amount}) do
+
+    user = Accounts.get_user!(conn.assigns.user.id)
+
+    with {:ok, user} <- Accounts.decrease_amount_user(user, amount) do
+      conn
+      |> put_view(ObankWeb.UserView)
+      |> render("show.json", user: user)
+    end
+  end
 end
