@@ -45,6 +45,9 @@ defmodule Obank.MixProject do
       {:bcrypt_elixir, "~> 1.0"},
       {:guardian, "~> 1.0"},
       {:cors_plug, "~> 2.0"},
+      {:edeliver, "~> 1.4.3"},
+      {:distillery, "~> 1.4"},
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
     ]
   end
 
